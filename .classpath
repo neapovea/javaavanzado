@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Tema 1. Sockets/EjemplosTema1/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Tema 2. 01. Bases de datos/EjemplosTema2/lib/sqlite-jdbc-3.36.0.3.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 01. Servlets y JSP/EjemplosTema4/lib/jakarta.servlet.jsp.jstl-2.0.0.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 01. Servlets y JSP/EjemplosTema4/lib/jakarta.servlet.jsp.jstl-api-2.0.0.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 01. Servlets y JSP/EjemplosTema4/lib/taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 01. Servlets y JSP/ProyectoMVC/src/main/webapp/WEB-INF/lib/jakarta.servlet.jsp.jstl-2.0.0.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 01. Servlets y JSP/ProyectoMVC/src/main/webapp/WEB-INF/lib/jakarta.servlet.jsp.jstl-api-2.0.0.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 01. Servlets y JSP/ProyectoMVC/src/main/webapp/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 02. Ejercicio 2/EjerciciosTema4/lib/classmate-0.8.0.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 02. Ejercicio 2/EjerciciosTema4/lib/hibernate-validator-7.0.5.Final.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 02. Ejercicio 2/EjerciciosTema4/lib/jakarta.validation-api-3.0.2.jar"/>
+	<classpathentry kind="lib" path="Tema 4. 02. Ejercicio 2/EjerciciosTema4/lib/jboss-logging-3.5.0.Final.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/byte-buddy-1.14.9.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jackson-annotations-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jackson-core-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jackson-databind-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jackson-module-jakarta-xmlbind-annotations-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jakarta.activation-api-2.1.3.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jakarta.annotation-api-2.1.1.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jakarta.inject-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jakarta.ws.rs-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jakarta.xml.bind-api-4.0.2.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jersey-client-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jersey-common-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jersey-entity-filtering-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/jersey-media-json-jackson-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Client/lib/osgi-resource-locator-1.0.3.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/angus-activation-2.0.2.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/aopalliance-repackaged-3.0.6.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/byte-buddy-1.14.9.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/hk2-api-3.0.6.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/hk2-locator-3.0.6.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/hk2-utils-3.0.6.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/istack-commons-runtime-4.1.2.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jackson-annotations-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jackson-core-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jackson-databind-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jackson-module-jakarta-xmlbind-annotations-2.17.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jakarta.activation-api-2.1.3.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jakarta.annotation-api-2.1.1.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jakarta.inject-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jakarta.validation-api-3.0.2.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jakarta.ws.rs-api-4.0.0.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jakarta.xml.bind-api-4.0.2.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/javassist-3.30.2-GA.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jaxb-core-4.0.5.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jaxb-runtime-4.0.5.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-client-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-common-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-container-servlet-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-container-servlet-core-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-entity-filtering-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-hk2-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-media-json-jackson-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/jersey-server-3.1.7.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/osgi-resource-locator-1.0.3.jar"/>
+	<classpathentry kind="lib" path="Tema 5. 01. Servicios web/EjemplosTema5/EjemploRestAPI_Server/lib/txw2-4.0.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
