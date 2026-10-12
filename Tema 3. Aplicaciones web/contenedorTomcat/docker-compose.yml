@@ -1,0 +1,10 @@
+services:
+  tomcat:
+    image: tomcat:10.1.60-jdk17-temurin-resolute
+    container_name: mi-tomcat
+    ports:
+      - "8080:8080"
+    volumes:
+      - /home/alx/Documentos/Propios/Formación/INAP/FT26023400001 PROGRAMACIÓN ORIENTADA A OBJETOS- JAVA AVANZADO/Tema 3. Aplicaciones web/contenedorTomcat/tomcat-users.xml.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    command: >
+      sh -c "cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/ && catalina.sh run"
