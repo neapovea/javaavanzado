@@ -11,9 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,11 +21,11 @@ import org.sqlite.SQLiteDataSource;
 
 /**
  * Curso Java Avanzado - Ejercicio 1
- * Extracción de cotizaciones del IBEX 35 mediante Web Scraping y Expresiones Regulares, Guardando los datos en BBDD
- * Esta clase se conecta a la página HTML de cotizaciones del IBEX 35,
+ * El primer paso de esta clase se conecta a la página HTML de cotizaciones del IBEX 35,
  * procesa el documento eliminando saltos de línea y aplica patrones Regex
- * para extraer el nombre de cada empresa y su última cotización.
- * En un segundo paso guarda los datos en una BBDD, borrando los que haya anteriormente en la Tabla.
+ * para extraer el nombre de cada empresa y su última cotización
+ * cargando los datos en un Array.
+ * En un segundo paso guarda los datos del Array en una BBDD, borrando los que haya anteriormente en la Tabla.
  *  */
 public class Ejercicio1Ibex35 {
 
@@ -50,11 +48,11 @@ public class Ejercicio1Ibex35 {
 
 
     /**
-     * Primera parte: extracción de la información conectar a la web y carga la lista de empresas con su última cotización
-     * @param listaEmpresas ArrayList con datos de las empresas del tipo empresaIbex
-     * @param mostrarDatosLeidos si es TRUE muestra los datos cargados en la BBDD.
-     * @return TRUE si todo ha ido bien, en caso contrario false
-     * @throws Exception Si ocurre algún error
+     * Primera parte: extracción de la información de la web y carga la lista de empresas con su última cotización
+     * @param listaEmpresas ArrayList con datos de las empresas del tipo empresaIbex.
+     * @param mostrarDatosLeidos si es TRUE muestra los datos descargados.
+     * @return TRUE si todo ha ido bien, en caso contrario false.
+     * @throws Exception Si ocurre algún error.
      **/
     private static Boolean extraerDatos(ArrayList<empresaIbex> listaEmpresas, Boolean mostrarDatosLeidos) {
         // URL sitio web
@@ -82,10 +80,11 @@ public class Ejercicio1Ibex35 {
                 Pattern trPattern = Pattern.compile("<tr>\\s*<td[^>]*>(.*?)</td>\\s*<td[^>]*>(?:<span[^>]*>)?(.*?)(?:</span>)?</td>", Pattern.CASE_INSENSITIVE);
                 Matcher trMatcher = trPattern.matcher(tbodyContent);
 
+                // Contador de datos.
                 int contador = 0;
 
                 if (mostrarDatosLeidos) {
-                	System.out.println("Datos leidos:");
+                	System.out.println("Datos leídos:");
                 	// Cabecera formateada para la salida por consola
                 	System.out.printf("\t%-4s | %-22s | %-18s%n", "Nº", "Acción / Empresa", "Última Cotización");
                 	System.out.println("\t---------------------------------------------------------");
@@ -139,7 +138,6 @@ public class Ejercicio1Ibex35 {
     /**
      * Con una conexión HTTP a la URL devuelve el contenido HTML como una String.
      * Utiliza UTF-8 para garantizar la correcta codificación de caracteres especiales y acentos.
-     * 
      * @param urlString Dirección URL a consultar
      * @return Contenido HTML completo de la página web
      * @throws Exception Si ocurre algún error en la conexión o lectura de datos
@@ -161,6 +159,10 @@ public class Ejercicio1Ibex35 {
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append("\n");
             }
+        } catch (Exception e) {
+            System.err.println("Ocurrió un error al descargar el HTML");
+            e.printStackTrace();
+            return "".toString();
         }
 
         return sb.toString();
@@ -203,9 +205,8 @@ public class Ejercicio1Ibex35 {
 
 			//Cargamos los datos por cada empresa en la BBDD
 			for (empresaIbex empresa: listaEmpresas) {
-//				stmt.setInt(1, empresa.getId());
 				stmt.setString(1, empresa.getNombre());
-				stmt.setString(2, empresa.getultimaCotizacion());
+				stmt.setString(2, empresa.getUltimaCotizacion());
 				
 				numEmpresasProcesadas += stmt.executeUpdate();
 			}
@@ -232,6 +233,12 @@ public class Ejercicio1Ibex35 {
 	                System.out.println("\tFila: NOMBRE = " + nombre + ", ULTIMO = " + cotizacion);
 	            }
 
+	        	//Mostrar lo que hay en la lista
+	        	System.out.println("Datos de la lista:");
+				for (empresaIbex empresa: listaEmpresas) {
+					System.out.println("\t" + empresa);
+				}
+	            
 	           } catch (SQLException e) {
 	               System.err.println("Error: " + e.getMessage());
 	               e.printStackTrace(System.err);
@@ -244,22 +251,23 @@ public class Ejercicio1Ibex35 {
     	
     }
         
+    /**
+     * Representa una empresa del IBEX con su identificador, nombre y última cotización.
+     */
     
-	
 	private static  class empresaIbex
 	{
 		private int id;
 		private String nombre;
 		private String ultimaCotizacion;
 		
-		
 		/**
-		 * Constructor.
-		 * 
-		 * @param id identificador único
-		 * @param nombre nombre
-		 * @param ultimaCotizacion ultimaCotizacion
-		 */
+	     * Constructor de la clase EmpresaIbex.
+	     * 
+	     * @param id Identificador único de la empresa.
+	     * @param nombre Nombre de la empresa.
+	     * @param ultimaCotizacion Última cotización registrada de la empresa.
+	     */
 		public empresaIbex(int id, String nombre, String ultimaCotizacion) {
 			super();
 			this.id = id;
@@ -267,19 +275,36 @@ public class Ejercicio1Ibex35 {
 			this.ultimaCotizacion = ultimaCotizacion;
 		}
 		
+		/**
+	     * Devuelve el identificador de la empresa.
+	     * 
+	     * @return El ID único.
+	     */
 		public int getId() {
 			return id;
 		}
+		
+		/**
+	     * Devuelve el nombre de la empresa.
+	     * 
+	     * @return El nombre.
+	     */
 		public String getNombre() {
 			return nombre;
 		}
-		public String getultimaCotizacion() {
+		
+		/**
+	     * Devuelve la última cotización de la empresa.
+	     * 
+	     * @return La última cotización.
+	     */
+		public String getUltimaCotizacion() {
 			return ultimaCotizacion;
 		}
 
 		@Override
 		public String toString() {
-			return "Empresa [id=" + id + ", nombre=" + nombre + ", apellidos=" + ultimaCotizacion;
+			return "Empresa [id=" + id + ",nombre=" + nombre + ", última cotización=" + ultimaCotizacion + "]";
 		}
 		
 		
