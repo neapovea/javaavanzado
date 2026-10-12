@@ -1,0 +1,7 @@
+
+El servidor Tomcat que comenta es la versión 10.1
+El contenedor de la versión Tomcat 10.1 actual es el 10.1.60.
+En el documento comenta que se tiene que usar un jdk17, por lo que elegiremos el tomcat:10.1.60-jdk17
+Existe varias versiones una de ellas des la temurin-resolute, que es de la ultima versión lts de ubuntu.
+Por lo que instalamos el contenedor:
+	docker pull tomcat:10.1.60-jdk17-temurin-resolute
