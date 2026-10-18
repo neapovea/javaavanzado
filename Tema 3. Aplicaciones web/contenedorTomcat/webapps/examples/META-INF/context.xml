@@ -21,4 +21,5 @@
 <!--                   
   <Valve className="org.apache.catalina.valves.RemoteCIDRValve"
          allow="127.0.0.0/8,::1/128" />
+-->
 </Context>
