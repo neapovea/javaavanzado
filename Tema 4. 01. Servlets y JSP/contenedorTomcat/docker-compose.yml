@@ -1,0 +1,14 @@
+services:
+  tomcat:
+    image: tomcat:10.1.60-jdk17-temurin-resolute
+    container_name: mi-tomcat-t4
+    ports:
+      - "8080:8080" # Puerto HTTP de la aplicación
+      - "8000:8000" # Puerto de depuración (JPDA)
+    environment:
+      - JPDA_ADDRESS=*:8000
+      - JPDA_TRANSPORT=dt_socket
+    command: ['catalina.sh', 'jpda', 'run']
+    volumes:
+      - ./conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ../webapps:/usr/local/tomcat/webapps
