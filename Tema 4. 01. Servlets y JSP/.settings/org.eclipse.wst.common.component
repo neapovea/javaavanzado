@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
+            
+    
     <wb-module deploy-name="Tema 4. 01. Servlets y JSP">
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/ProyectoMVC/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/EjemplosTema4/src"/>
-                
+        <wb-resource deploy-path="/" source-path="/ProyectoMVC/src/main/java/web"/>
+                        
+        
         <property name="context-root" value="Tema_4._01._Servlets_y_JSP"/>
-                
+                        
+        
         <property name="java-output-path" value="/Tema 4. 01. Servlets y JSP/bin"/>
-            
-    </wb-module>
+                    
     
+    </wb-module>
+        
+
 </project-modules>
