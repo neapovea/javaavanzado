@@ -71,6 +71,7 @@ public class ClienteController extends HttpServlet {
 			cliente.setNombre(strNombre);
 			cliente.setApellidos(strApellidos);
 			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFechaNacimiento);
+			//Date fecha = new SimpleDateFormat("dd/MM/yyyy").parse(strFechaNacimiento);
 			cliente.setFechaNacimiento(fecha);
 			cliente.setNumPedidos(Integer.parseInt(strNumPedido));
 			if (strClienteId == null || strClienteId.isEmpty()) {
@@ -89,5 +90,11 @@ public class ClienteController extends HttpServlet {
 		// evitamos que si el usuario recarga la página vuelva a crear otra vez el mismo
 		// cliente
 		response.sendRedirect("ClienteController?action=listado");
+		
+		/*
+        RequestDispatcher vista = request.getRequestDispatcher(LISTADO);
+        request.setAttribute("clientes", dao.obtenerClientes());
+        vista.forward(request, response);
+        */
 	}
 }
