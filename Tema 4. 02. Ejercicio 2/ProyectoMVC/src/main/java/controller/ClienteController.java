@@ -11,6 +11,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.RequestDispatcher;
+
+import jakarta.validation.Validation; 
+import jakarta.validation.Validator; 
+import jakarta.validation.ConstraintViolation; 
+import java.util.Set;
+
 import dao.*;
 import model.*;
 
@@ -60,6 +66,7 @@ public class ClienteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException
 	{ 
+		String urlVista="";
 		// Recuperamos los parámetros
 		String strClienteId = request.getParameter("clienteId");
 		String strNombre = request.getParameter("nombre");   
@@ -67,7 +74,7 @@ public class ClienteController extends HttpServlet {
 		String strFechaNacimiento = request.getParameter("fechaNacimiento");
 		
 		String strNumPedido = request.getParameter("numPedidos");
-		
+	
 		// Creamos la clase Cliente y le asignamos los valores
 		try {
 			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFechaNacimiento);
@@ -102,6 +109,10 @@ public class ClienteController extends HttpServlet {
 		}
 		//en vez de enviar a la vista jsp enviamos un redirect al navegador, de esta forma
 		//evitamos que si el usuario recarga la página vuelva a crear otra vez el mismo cliente
-		response.sendRedirect("ClienteController?action=listado");
+		//response.sendRedirect("ClienteController?action=listado");		
+		RequestDispatcher vista = request.getRequestDispatcher(LISTADO);
+		request.setAttribute("clientes", dao.obtenerClientes());
+		vista.forward(request, response);
+		
 	}
 }

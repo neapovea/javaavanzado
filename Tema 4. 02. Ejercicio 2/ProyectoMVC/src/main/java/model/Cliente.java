@@ -5,10 +5,22 @@ import java.util.ArrayList;
 import java.util.Date; 
 import java.util.List;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+
 public class Cliente{
 	private int id;
+	@NotNull(message = "El nombre es obligatorio") // Verifica que el campo no es nulo
+	@NotBlank(message = "El nombre es obligatorio") // Verifica que el campo no está en blanco
 	private String nombre;
+	
+	@NotNull(message = "Los apellidos son obligatorios") // Verifica que el campo no es nulo 
+	@NotBlank(message = "Los apellidos no pueden estar en blanco") // Verifica que el campo no está en blanco
 	private String apellidos;
+	
+	@NotNull(message = "La fecha de nacimiento es obligatoria") // Verifica que el campo no es nulo 
+	@Past(message = "La fecha de nacimiento debe ser anterior a la actual")// Verifica que el campo no está en blanco
 	private Date fechaNacimiento;
 	//eliminamos el int para crear usar lista // private int numPedidos;
 	private List<Pedido> pedidos; // Lista de pedidos del cliente
