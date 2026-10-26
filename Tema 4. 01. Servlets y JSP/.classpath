@@ -16,6 +16,5 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="ProyectoMVC/lib/jakarta.servlet.jsp.jstl-2.0.0.jar"/>
 	<classpathentry kind="lib" path="ProyectoMVC/lib/jakarta.servlet.jsp.jstl-api-2.0.0.jar"/>
-	<classpathentry kind="lib" path="ProyectoMVC/lib/taglibs-standard-impl-1.2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

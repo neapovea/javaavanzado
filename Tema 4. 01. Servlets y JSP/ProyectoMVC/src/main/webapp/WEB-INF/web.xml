@@ -4,25 +4,12 @@
     <description></description>
     <display-name>ClienteController</display-name>
     <servlet-name>ClienteController</servlet-name>
-    <servlet-class>controller.ClienteController</servlet-class>    
+    <servlet-class>controller.ClienteController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ClienteController</servlet-name>
     <url-pattern>/ClienteController</url-pattern>
   </servlet-mapping>
-<servlet>
-    <!-- Un nombre interno para enlazar ambas etiquetas -->
-    <servlet-name>ServletPrincipal</servlet-name> 
-    <!-- La ruta real de tu clase Java, incluyendo su paquete -->
-    <servlet-class>web.PrimerServlet</servlet-class> 
-</servlet>
-
-<servlet-mapping>
-    <!-- Debe coincidir exactamente con el nombre de arriba -->
-    <servlet-name>ServletPrincipal</servlet-name>
-    <!-- Esta es la URL final que escribirás en el navegador -->
-    <url-pattern>/PrimerServlet</url-pattern> 
-</servlet-mapping>  
   <display-name>ProyectoMVC</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
