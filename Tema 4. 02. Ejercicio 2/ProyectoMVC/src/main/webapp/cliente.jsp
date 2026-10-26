@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
 <html lang="es">
 <head>
   <title>Datos cliente</title>
@@ -27,6 +28,19 @@
 <body>
   <div class="container">
     <h1 class="text-center my-4">Datos cliente</h1>
+
+	<!-- Bloque de visualización de errores -->
+	<c:if test="${not empty errores}">
+	    <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 15px;">
+	        <ul>
+	            <c:forEach items="${errores}" var="error">
+	                <li><c:out value="${error}" /></li>
+	            </c:forEach>
+	        </ul>
+	    </div>
+	</c:if>
+
+    
     <form method="POST" action='ClienteController' name="formulario">
       <div class="d-flex justify-content-center">
         <div class="contenedor-formulario">

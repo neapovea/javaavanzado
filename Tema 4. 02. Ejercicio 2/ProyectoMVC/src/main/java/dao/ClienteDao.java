@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Map;
 import model.Cliente;
 
+import jakarta.validation.Validation; 
+import jakarta.validation.Validator; 
+import jakarta.validation.ConstraintViolation; 
+import java.util.Set;
+
+
 public class ClienteDao {
 	private HashMap<Integer, Cliente> bdClientes;
 	
@@ -30,8 +36,30 @@ public class ClienteDao {
 		 return bdClientes.get(clienteId);
 	}
 	 
-	public void insertarCliente(Cliente cliente) { 
-		 bdClientes.put(cliente.getId(), cliente); 
+	public List<String> insertarCliente(Cliente cliente) { 
+		
+		List<String> errores = new ArrayList<>();
+		
+		// Obtener la instancia del validador [6]
+		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
+		// Validar la entidad
+		Set<ConstraintViolation<Cliente>> violations = validator.validate(cliente);
+
+		if (!violations.isEmpty()) {
+		    // Extraer los mensajes de error
+		    
+		    for (ConstraintViolation<Cliente> violation : violations) {
+		        errores.add(violation.getMessage());
+		    }
+		} else {
+		    // Guardar en DAO y redirigir mediante sendRedirect [8]
+			bdClientes.put(cliente.getId(), cliente);
+		}
+		//devuelve errores si los hay, sino devuelve la lista vacia
+		return errores;
+		
+		  
 	} 
 	 
 	 
@@ -39,14 +67,33 @@ public class ClienteDao {
 		bdClientes.remove(clienteId);
 	}
 	
-	public void actualizarCliente(Cliente cliente) { 
-		// Preservamos la lista de pedidos existente al actualizar los datos personales 
-		Cliente clienteExistente = bdClientes.get(cliente.getId()); 
-		if (clienteExistente != null) { 
-			 clienteExistente.setNombre(cliente.getNombre()); 
-			 clienteExistente.setApellidos(cliente.getApellidos()); 
-			 clienteExistente.setFechaNacimiento(cliente.getFechaNacimiento()); 
-		} 
+	public  List<String> actualizarCliente(Cliente cliente) { 
+		List<String> errores = new ArrayList<>();
+		
+		// Obtener la instancia del validador [6]
+		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+		// Validar la entidad
+		Set<ConstraintViolation<Cliente>> violations = validator.validate(cliente);		
+
+		if (!violations.isEmpty()) {
+		    // Extraer los mensajes de error
+		    
+		    for (ConstraintViolation<Cliente> violation : violations) {
+		        errores.add(violation.getMessage());
+		    }
+		} else {
+
+			// Preservamos la lista de pedidos existente al actualizar los datos personales 
+			Cliente clienteExistente = bdClientes.get(cliente.getId());
+	
+			
+			if (clienteExistente != null) { 
+				 clienteExistente.setNombre(cliente.getNombre()); 
+				 clienteExistente.setApellidos(cliente.getApellidos()); 
+				 clienteExistente.setFechaNacimiento(cliente.getFechaNacimiento()); 
+			}
+		}
+		return errores;
 	}
 	
 }

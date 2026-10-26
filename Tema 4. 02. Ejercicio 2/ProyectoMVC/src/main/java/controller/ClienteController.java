@@ -4,7 +4,10 @@
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,10 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.RequestDispatcher;
 
-import jakarta.validation.Validation; 
-import jakarta.validation.Validator; 
-import jakarta.validation.ConstraintViolation; 
-import java.util.Set;
 
 import dao.*;
 import model.*;
@@ -66,6 +65,8 @@ public class ClienteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException
 	{ 
+		List<String> errores = new ArrayList<>();	//para guardar los errores de validación si los hay.
+		
 		String urlVista="";
 		// Recuperamos los parámetros
 		String strClienteId = request.getParameter("clienteId");
@@ -78,41 +79,53 @@ public class ClienteController extends HttpServlet {
 		// Creamos la clase Cliente y le asignamos los valores
 		try {
 			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFechaNacimiento);
+			Cliente cliente = new Cliente();
+		
 			if(strClienteId == null || strClienteId.isEmpty())
 			{
 			   // Si NO tiene idCliente, es nuevo
-			   Cliente cliente = new Cliente();
+			   
 			   cliente.setNombre(strNombre);
 			   cliente.setApellidos(strApellidos);
-			   
 			   cliente.setFechaNacimiento(fecha);
 			   int nuevoId = dao.obtenerClientes().size() + 1;
 			   cliente.setId(nuevoId);
-			   dao.insertarCliente(cliente);
+			   errores = dao.insertarCliente(cliente);
 			}
 			else
 			{
   			    // Si tiene idCliente, es una actualización
 				// Modificación respetando los pedidos existentes 
 				int id = Integer.parseInt(strClienteId); 
-				Cliente cliente = dao.obtenerClienteById(id); 
+				cliente = dao.obtenerClienteById(id); 
 				if (cliente != null) { 
 					// si existe cliente actualizmos datos
 					cliente.setNombre(strNombre); 
 					cliente.setApellidos(strApellidos); 
 					cliente.setFechaNacimiento(fecha); 
-					dao.actualizarCliente(cliente); 
+					errores = dao.actualizarCliente(cliente); 
 				}
 			}
+			if (!errores.isEmpty()){
+			   // Guardar errores y datos para devolver a la vista
+			   request.setAttribute("errores", errores);
+			   request.setAttribute("cliente", cliente);
+			   RequestDispatcher view = request.getRequestDispatcher(LISTADO);
+			   view.forward(request, response);
+			} else {
+				//en vez de enviar a la vista jsp enviamos un redirect al navegador, de esta forma
+				//evitamos que si el usuario recarga la página vuelva a crear otra vez el mismo cliente
+				//response.sendRedirect("ClienteController?action=listado");		
+				RequestDispatcher vista = request.getRequestDispatcher(LISTADO);
+				request.setAttribute("clientes", dao.obtenerClientes());
+				vista.forward(request, response);
+			}			
+		
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		//en vez de enviar a la vista jsp enviamos un redirect al navegador, de esta forma
-		//evitamos que si el usuario recarga la página vuelva a crear otra vez el mismo cliente
-		//response.sendRedirect("ClienteController?action=listado");		
-		RequestDispatcher vista = request.getRequestDispatcher(LISTADO);
-		request.setAttribute("clientes", dao.obtenerClientes());
-		vista.forward(request, response);
+
+
 		
 	}
 }

@@ -24,7 +24,6 @@ public class Cliente{
 	private Date fechaNacimiento;
 	//eliminamos el int para crear usar lista // private int numPedidos;
 	private List<Pedido> pedidos; // Lista de pedidos del cliente
-	//private ArrayList<Pedido> pedidos;
 	
 	public Cliente(){
 		this.pedidos = new ArrayList<>();

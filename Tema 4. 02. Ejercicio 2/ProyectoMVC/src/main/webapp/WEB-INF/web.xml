@@ -18,7 +18,7 @@
     <servlet-name>PedidoController</servlet-name>
     <url-pattern>/PedidoController</url-pattern>
   </servlet-mapping>
-  <display-name>ProyectoMVC</display-name>
+  <display-name>ProyectoMVCEjercicio2</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
