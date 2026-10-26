@@ -22,22 +22,29 @@ import model.*;
 
 public class PedidoController extends HttpServlet { 
 	private static final long serialVersionUID = 1L;
-	private ClienteDao dao = new ClienteDao();
+	private static String INSERTAR = "/pedido.jsp";
+	private static String LISTADO = "/listadoPedidos.jsp";
+	
+	private ClienteDao dao; 
+	public PedidoController() { 
+		super(); dao = ClienteDao.getInstance(); // Acceso al mismo DAO Singleton 	
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		String forward = "listadoPedidos.jsp";
+		String urlVista = "";
 		if ("listado".equals(action)) { 
 			int clienteId = Integer.parseInt(request.getParameter("clienteId"));
 			Cliente cliente = dao.obtenerClienteById(clienteId);
 			request.setAttribute("cliente", cliente);
+			urlVista = LISTADO;
 		} else if ("insertar".equals(action)) { // 
 			int clienteId = Integer.parseInt(request.getParameter("clienteId"));
 			request.setAttribute("clienteId", clienteId);
-			forward = "pedido.jsp";
+			urlVista = INSERTAR;
 		}
 
-		RequestDispatcher view = request.getRequestDispatcher(forward);
+		RequestDispatcher view = request.getRequestDispatcher(urlVista);
 		view.forward(request, response);
 	} 
 
@@ -59,7 +66,7 @@ public class PedidoController extends HttpServlet {
 		Cliente cliente = dao.obtenerClienteById(clienteId);
 		if (cliente != null) { 
 			Pedido pedido = new Pedido(articulo, precio);
-			cliente.addPedido(pedido);
+			cliente.getPedidos().add(pedido);
 		} // Redirección mediante GET al listado de pedidos para evitar registros duplicados  
 			response.sendRedirect("PedidoController?action=listado&clienteId=" + clienteId);
 	}

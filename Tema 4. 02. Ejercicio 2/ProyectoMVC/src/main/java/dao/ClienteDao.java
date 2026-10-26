@@ -7,38 +7,46 @@ import java.util.Map;
 import model.Cliente;
 
 public class ClienteDao {
-	private static Integer id = 1;
-	// Instancia única Singlenton //private HashMap<Integer, Cliente> bdClientes;
-	private static Map<Integer, Cliente> bdClientes = new HashMap<>();
+	private HashMap<Integer, Cliente> bdClientes;
+	
+	// Instancia única (Singleton) 
+	static private ClienteDao dao = new ClienteDao(); 
+		
  
- public ClienteDao() {
-	 bdClientes = new HashMap<Integer, Cliente>();
-	 id = 1;
- }
+	public ClienteDao() {
+		bdClientes = new HashMap<Integer, Cliente>();
+
+	}
+	 
+	public static ClienteDao getInstance() { 
+		 return dao; 
+	}	 
  
- public void insertarCliente(Cliente cliente) {
-	 cliente.setId(id);
-	 bdClientes.put(id, cliente);
-	 id++;
- }
- public void borrarCliente(int clienteId) {
-	 bdClientes.remove(clienteId);
- }
-
- public void actualizarCliente(Cliente cliente) { 
-	 // Preservamos la lista de pedidos existente al actualizar los datos personales 
-	 Cliente clienteExistente = bdClientes.get(cliente.getId()); 
-	 if (clienteExistente != null) { 
-		 clienteExistente.setNombre(cliente.getNombre()); 
-		 clienteExistente.setApellidos(cliente.getApellidos()); 
-		 clienteExistente.setFechaNacimiento(cliente.getFechaNacimiento()); 
-	 } 
- }
-
- public List<Cliente> obtenerClientes() {
-	 return new ArrayList<Cliente>(bdClientes.values());
- }
- public Cliente obtenerClienteById(int clienteId) {
-	 return bdClientes.get(clienteId);
- }
+	public List<Cliente> obtenerClientes() {
+	        return new ArrayList<>(bdClientes.values());
+	}
+	 
+	public Cliente obtenerClienteById(int clienteId) {
+		 return bdClientes.get(clienteId);
+	}
+	 
+	public void insertarCliente(Cliente cliente) { 
+		 bdClientes.put(cliente.getId(), cliente); 
+	} 
+	 
+	 
+	public void borrarCliente(int clienteId) {
+		bdClientes.remove(clienteId);
+	}
+	
+	public void actualizarCliente(Cliente cliente) { 
+		// Preservamos la lista de pedidos existente al actualizar los datos personales 
+		Cliente clienteExistente = bdClientes.get(cliente.getId()); 
+		if (clienteExistente != null) { 
+			 clienteExistente.setNombre(cliente.getNombre()); 
+			 clienteExistente.setApellidos(cliente.getApellidos()); 
+			 clienteExistente.setFechaNacimiento(cliente.getFechaNacimiento()); 
+		} 
+	}
+	
 }

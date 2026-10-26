@@ -22,7 +22,7 @@ public class ClienteController extends HttpServlet {
 	private ClienteDao dao;
 	public ClienteController() {
 		super();
-		dao = new ClienteDao();
+		dao = ClienteDao.getInstance();	// Acceso mediante Singleton
 	}
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException
@@ -65,27 +65,37 @@ public class ClienteController extends HttpServlet {
 		String strNombre = request.getParameter("nombre");   
 		String strApellidos = request.getParameter("apellidos");
 		String strFechaNacimiento = request.getParameter("fechaNacimiento");
+		
 		String strNumPedido = request.getParameter("numPedidos");
 		
 		// Creamos la clase Cliente y le asignamos los valores
 		try {
-		   Cliente cliente = new Cliente();
-		   cliente.setNombre(strNombre);
-		   cliente.setApellidos(strApellidos);
-		   Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFechaNacimiento);
-		   cliente.setFechaNacimiento(fecha);
-		   //lo quitamos ya que lo controlamos en Pedidoscontroller //cliente.setNumPedidos(Integer.parseInt(strNumPedido));
-		   
-		   if(strClienteId == null || strClienteId.isEmpty())
+			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFechaNacimiento);
+			if(strClienteId == null || strClienteId.isEmpty())
 			{
 			   // Si NO tiene idCliente, es nuevo
+			   Cliente cliente = new Cliente();
+			   cliente.setNombre(strNombre);
+			   cliente.setApellidos(strApellidos);
+			   
+			   cliente.setFechaNacimiento(fecha);
+			   int nuevoId = dao.obtenerClientes().size() + 1;
+			   cliente.setId(nuevoId);
 			   dao.insertarCliente(cliente);
 			}
 			else
 			{
   			    // Si tiene idCliente, es una actualización
-				cliente.setId(Integer.parseInt(strClienteId));			
-				dao.actualizarCliente(cliente);
+				// Modificación respetando los pedidos existentes 
+				int id = Integer.parseInt(strClienteId); 
+				Cliente cliente = dao.obtenerClienteById(id); 
+				if (cliente != null) { 
+					// si existe cliente actualizmos datos
+					cliente.setNombre(strNombre); 
+					cliente.setApellidos(strApellidos); 
+					cliente.setFechaNacimiento(fecha); 
+					dao.actualizarCliente(cliente); 
+				}
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
