@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class ClienteDao {
 	private HashMap<Integer, Cliente> bdClientes;
+	private int contadorId; // Secuencia autonumérica para tener los ids únicos
 	
 	// Instancia única (Singleton) 
 	static private ClienteDao dao = new ClienteDao(); 
@@ -21,6 +22,7 @@ public class ClienteDao {
  
 	public ClienteDao() {
 		bdClientes = new HashMap<Integer, Cliente>();
+		contadorId = 0; // Inicialización del contador
 
 	}
 	 
@@ -35,9 +37,14 @@ public class ClienteDao {
 	public Cliente obtenerClienteById(int clienteId) {
 		 return bdClientes.get(clienteId);
 	}
-	 
+	
+	// Devuelve el siguiente ID disponible incrementando la secuencia 
+	public synchronized int getSiguienteId() { 
+		return ++contadorId; 
+	}
+	
 	public List<String> insertarCliente(Cliente cliente) { 
-		
+
 		List<String> errores = new ArrayList<>();
 		
 		// Obtener la instancia del validador [6]
@@ -48,11 +55,12 @@ public class ClienteDao {
 
 		if (!violations.isEmpty()) {
 		    // Extraer los mensajes de error
-		    
 		    for (ConstraintViolation<Cliente> violation : violations) {
 		        errores.add(violation.getMessage());
 		    }
 		} else {
+			// coje el siguiente nº 
+			cliente.setId(getSiguienteId()); 			
 		    // Guardar en DAO y redirigir mediante sendRedirect [8]
 			bdClientes.put(cliente.getId(), cliente);
 		}
@@ -95,5 +103,7 @@ public class ClienteDao {
 		}
 		return errores;
 	}
+	
+
 	
 }

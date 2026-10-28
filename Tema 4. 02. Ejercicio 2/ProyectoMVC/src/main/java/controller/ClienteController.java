@@ -81,15 +81,13 @@ public class ClienteController extends HttpServlet {
 			Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFechaNacimiento);
 			Cliente cliente = new Cliente();
 		
-			if(strClienteId == null || strClienteId.isEmpty())
+			if(strClienteId == null || strClienteId.isEmpty()|| strClienteId.equals("0"))
 			{
 			   // Si NO tiene idCliente, es nuevo
 			   
 			   cliente.setNombre(strNombre);
 			   cliente.setApellidos(strApellidos);
 			   cliente.setFechaNacimiento(fecha);
-			   int nuevoId = dao.obtenerClientes().size() + 1;
-			   cliente.setId(nuevoId);
 			   errores = dao.insertarCliente(cliente);
 			}
 			else
@@ -110,7 +108,7 @@ public class ClienteController extends HttpServlet {
 			   // Guardar errores y datos para devolver a la vista
 			   request.setAttribute("errores", errores);
 			   request.setAttribute("cliente", cliente);
-			   RequestDispatcher view = request.getRequestDispatcher(LISTADO);
+			   RequestDispatcher view = request.getRequestDispatcher(INSERTAR_O_EDITAR);
 			   view.forward(request, response);
 			} else {
 				//en vez de enviar a la vista jsp enviamos un redirect al navegador, de esta forma

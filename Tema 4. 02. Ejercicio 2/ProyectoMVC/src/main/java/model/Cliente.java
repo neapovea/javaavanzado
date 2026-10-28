@@ -8,15 +8,18 @@ import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.*;
 
 public class Cliente{
 	private int id;
 	@NotNull(message = "El nombre es obligatorio") // Verifica que el campo no es nulo
 	@NotBlank(message = "El nombre es obligatorio") // Verifica que el campo no está en blanco
+	@Pattern(regexp = "^\\D*$", message = "El nombre no puede contener números") // tiene que ser cadena
 	private String nombre;
 	
 	@NotNull(message = "Los apellidos son obligatorios") // Verifica que el campo no es nulo 
 	@NotBlank(message = "Los apellidos no pueden estar en blanco") // Verifica que el campo no está en blanco
+	@Pattern(regexp = "^\\D*$", message = "Los apellidos no puede contener números") // tiene que ser cadena
 	private String apellidos;
 	
 	@NotNull(message = "La fecha de nacimiento es obligatoria") // Verifica que el campo no es nulo 
