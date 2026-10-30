@@ -1,0 +1,14 @@
+.contenedor-formulario {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form-label {
+  margin-bottom: 0;
+}
+
+.readonly {
+  background-color: var(--bs-secondary-bg);;
+}
