@@ -113,13 +113,19 @@ class FiltrosTest {
         List<String> resultado = Filtros.obtenerNifsCiudadanos(ciudadanosPrueba);
         List<String> esperados = Arrays.asList("11111111H", "22222222J", "33333333P", "44444444A", "55555555B", "66666666C", "77777777D", "88888888E");
 
+        // Verificar que la funión de Filtros devuelve datos
+        assertNotNull(resultado);
+
+        // Verificar que tamaño no es igual que 0
+        assertNotEquals(0, resultado.size());
         // Verificar tamaño
         assertEquals(8, resultado.size());
+        
 
-        // Verificar elemento a elemento
-        for (int i = 0; i < esperados.size(); i++) {
-            assertEquals(esperados.get(i), resultado.get(i));
-        }
+        // 	Verificar elementos de las dos listas
+        assertIterableEquals(esperados, resultado);
+
+
     }
 
     /*
@@ -130,13 +136,16 @@ class FiltrosTest {
         List<String> resultado = Filtros.obtenerIdsExpedientes(ciudadanosPrueba);
         List<String> esperados = Arrays.asList("EXP1", "EXP10", "EXP11", "EXP12", "EXP2", "EXP3", "EXP4", "EXP5", "EXP6", "EXP7", "EXP8", "EXP9");
         
+        // Verificar que la funión de Filtros devuelve datos
+        assertNotNull(resultado);
+
         // Verificar tamaño
         assertEquals(12, resultado.size());
+        assertNotEquals(18, resultado.size());
+        
+        // 	Verificar elementos de las dos listas
+        assertIterableEquals(esperados, resultado);
 
-        // Verificar elemento a elemento
-        for (int i = 0; i < esperados.size(); i++) {
-            assertEquals(esperados.get(i), resultado.get(i));
-        }
     }
 
     
@@ -147,16 +156,25 @@ class FiltrosTest {
     void testObtenerSalidasNoLeidas() {
         List<SalidaRegistro> resultado = Filtros.obtenerSalidasNoLeidas(ciudadanosPrueba);
         String cadenaSalida = "";
-        // Verificar tamaño
-        assertEquals(7, resultado.size());
 
+        // Verificar que la funión de Filtros devuelve datos
+        assertNotNull(resultado);
+
+        // Verificar tamaño
+        assertEquals(7, resultado.size());        
+        assertNotEquals(18, resultado.size());
+        
         // Verificar títulos según orden.
         for (int i = 0; i < resultado.size(); i++) {
         	cadenaSalida = switch (i) {
 	            case 0, 1, 2 -> cadenaSalida="OTRA SALIDA NO LEÍDA";
 	            case 3, 4, 5 -> cadenaSalida="OTRA SALIDA NO LEÍDA MÁS";
 	            default -> cadenaSalida="SALIDA NO LEÍDA";
-            };              
+            };
+            // Verificar que la salida esta como no leída            
+            assertFalse(resultado.get(i).isLeida());
+
+            // Verificar títulos.
             assertEquals(cadenaSalida, resultado.get(i).getTitulo());
         }
     }
@@ -169,12 +187,13 @@ class FiltrosTest {
         List<String> resultado = Filtros.obtenerCodigosRegistroSalidasNoLeidas(ciudadanosPrueba);
         List<String> esperados = Arrays.asList("S000202200012", "S000202200010", "S000202200009", "S000202200007", "S000202200005", "S000202200002", "S000202200001");
 
+        // Verificar que la funión de Filtros devuelve datos
+        assertNotNull(resultado);
+
         // Verificar tamaño
         assertEquals(7, resultado.size());
         
-        // 	Verificar elemento a elemento
-        for (int i = 0; i < esperados.size(); i++) {
-            assertEquals(esperados.get(i), resultado.get(i));
-        }
+        // 	Verificar elementos de las dos listas
+        assertIterableEquals(esperados, resultado);
     }
 }
